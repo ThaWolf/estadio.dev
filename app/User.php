@@ -26,7 +26,7 @@ class User extends Authenticatable
 
 public function torneos(){
 
-return $this->belongsToMany('App\Torneo');
+return $this->belongsToMany('App\Torneo' , 'torneos_users');
 
 }   
 
