@@ -16,6 +16,7 @@ class CreateTorneosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->text('descripcion');
+            $table->enum('status', ['NotStarted', 'InProgress', 'Finished'])->default('NotStarted');
             $table->enum('formato', ['Solitario', 'Multijugador'])->default('Solitario');
             $table->datetime('creado')->default('0000-00-00 00:00');
             $table->datetime('inicio')->default('0000-00-00 00:00');

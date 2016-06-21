@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>.: Brackets :.</title>
-</head>
-<body>
+
+@extends('layouts.app')
+
+
+
+@section('posts')
+<section class="row">
+
+<div class="class=col-md-6 col-md-offset-3">
 <h1 class="title">.: Brackets :.</h1>
 
-<div class="wrapper">
-
     <div class="brackets">
-    </div>
+    
 
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    <script src="{{asset('src/js/brackets.min.js') }}"></script>
 
 <script>
 
@@ -144,6 +140,7 @@
 
     })(jQuery);
 </script>
-
-</body>
-</html>
+</div>
+</div>
+</section>
+@endsection

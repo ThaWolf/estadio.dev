@@ -18,5 +18,11 @@ public function user(){
 
 }
 
+public function rounds(){
+
+		return $this->hasMany('App\Round');
+
+}
+
     
 }

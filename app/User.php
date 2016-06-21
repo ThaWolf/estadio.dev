@@ -30,6 +30,12 @@ return $this->belongsToMany('App\Torneo' , 'torneos_users');
 
 }   
 
+public function pools(){
+
+return $this->belongsToMany('App\Pool');
+
+}   
+
 
 
 }

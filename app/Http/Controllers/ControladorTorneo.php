@@ -65,12 +65,13 @@ class ControladorTorneo extends Controller
     public function show($id)
     {
             
-                $inscriptos = User::whereHas('torneos',function($query) use ($id)
+               /* $inscriptos = User::whereHas('torneos',function($query) use ($id)
             {
                 $query->where('id','=',$id);
             }
             )->get();
-
+            */
+            $inscriptos = Torneo::find($id)->user;
         return view('torneo.principal', ['inscriptos' => $inscriptos] ) // Corregir, $inscriptos tiene que reflejar directamente el Nombre del user segun el ID.
         -> with ('torneo', Torneo::find($id));
     }
