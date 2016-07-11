@@ -1,6 +1,6 @@
 <!-- Menu Items -->
 <li>
-  <a href="{{ url('/home') }}">
-  	Home Example
+  <a href="{{ url('/tournament') }}">
+  	Torneos
   </a>
 </li>

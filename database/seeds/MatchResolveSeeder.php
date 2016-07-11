@@ -18,7 +18,7 @@ class MatchResolveSeeder extends Seeder
         $availableScores = collect(range(0, 9));
         $agreeResults = collect([ true, false ]);
         // Uncomment for no disagrees
-        // $agreeResults = collect([ true ]);
+         $agreeResults = collect([ true ]);
 
         $unresolvedMatches = Match::where('status', '!=', 'Finished')->get();
         if($unresolvedMatches->count() == 0){

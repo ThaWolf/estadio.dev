@@ -172,7 +172,7 @@
             css += "    overflow: hidden;";
             css += "    margin: 10px;";
             css += "    width: " + get_width_container( n_brackets ) + "px !important;";
-            css += "    height: " + get_height_container( n_brackets ) + "px !important;";
+            //css += "    height: " + get_height_container( n_brackets ) + "px !important;";
             css += "}";
             css += ".container-brackets .round{ width: 150px; margin-left: -75px; float: left;}";
             css += "    .container-brackets .round:first-child{ margin-left: 0; }";

@@ -63,5 +63,9 @@ class Tournament extends Model
 	public function getRoundInterval(){
 		return new DateInterval('PT'.$this->round_time_limit.'S');
 	}
+
+	public function haveTeams(){
+		return $this->type == 'Team';
+	}
     
 }

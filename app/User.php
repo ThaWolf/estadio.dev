@@ -47,4 +47,8 @@ class User extends Authenticatable
         return $this->morphMany('App\Match', 'winner');
     }
 
+    public function captainTeams(){
+        return $this->hasMany('App\Team', 'captain_id');
+    }
+
 }

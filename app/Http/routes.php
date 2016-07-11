@@ -12,18 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('tournament.list');
 });
 
 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-// New models
-//Route::resource('torneo', 'ControladorTorneo',['names' => ['show' => 'ver.torneo' ]]);
-
-//Route::resource('brackets', 'ControllerBrackets');
-
-
+// Tournament controller routes
+Route::get('/tournament', ['as' => 'tournament.list', 'uses' => 'TournamentController@index']);
+Route::get('/tournament/{id}', ['as' => 'tournament.view', 'uses' => 'TournamentController@show']);
+Route::post('/tournament/{id}/subscribe', ['as' => 'tournament.subscribe', 'uses' => 'TournamentController@subscribe']);
+Route::post('/tournament/{id}/unsubscribe', ['as' => 'tournament.unsubscribe', 'uses' => 'TournamentController@unsubscribe']);
+Route::post('/tournament/{id}/start', ['as' => 'tournament.start', 'uses' => 'TournamentController@start']);
+Route::post('/tournament/{id}/resolve', ['as' => 'tournament.resolve', 'uses' => 'TournamentController@resolve']);
+// Match controller routes
+Route::get('/match/{id}', ['as' => 'match.view', 'uses' => 'MatchController@show']);
+Route::post('/match/{id}/report', ['as' => 'match.report', 'uses' => 'MatchController@report']);
+Route::post('/match/{id}/resolve', ['as' => 'match.resolve', 'uses' => 'MatchController@resolve']);
 
 
