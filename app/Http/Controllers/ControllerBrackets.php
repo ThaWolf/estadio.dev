@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Torneo;
 use App\User;
-use App\Pool;
 use App\Round;
 use App\Match;
 use App\Game;

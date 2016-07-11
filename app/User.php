@@ -24,18 +24,27 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-public function torneos(){
+    public function tournaments(){
+        return $this->morphToMany('App\Tournament' , 'tournament', 'tournament_participant');
+    }
 
-return $this->belongsToMany('App\Torneo' , 'torneos_users');
+    public function created_tournaments(){
+        return $this->hasMany('App\User', 'creator_id');
+    }
 
-}   
+    public function local_matches()
+    {
+        return $this->morphMany('App\Match', 'local');
+    }
 
-public function pools(){
+    public function away_matches()
+    {
+        return $this->morphMany('App\Match', 'away');
+    }
 
-return $this->belongsToMany('App\Pool');
-
-}   
-
-
+    public function win_matches()
+    {
+        return $this->morphMany('App\Match', 'winner');
+    }
 
 }

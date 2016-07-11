@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.cms')
 
 @section('content')
 	{!!Form::open(['route' => 'torneo.store', 'method' => 'POST']) !!}
@@ -23,6 +23,6 @@
     </label>
   </div>
 		{!!Form::submit( 'crear', ['class' => 'btn btn-primary']) !!}
-    
+    {!!Form::close() !!}
 
 @endsection

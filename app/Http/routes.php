@@ -19,10 +19,10 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+// New models
+//Route::resource('torneo', 'ControladorTorneo',['names' => ['show' => 'ver.torneo' ]]);
 
-Route::resource('torneo', 'ControladorTorneo',['names' => ['show' => 'ver.torneo' ]]);
-
-Route::resource('brackets', 'ControllerBrackets');
+//Route::resource('brackets', 'ControllerBrackets');
 
 
 

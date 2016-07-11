@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.cms')
 
 @section('content')
 @foreach($torneos as $torneo)

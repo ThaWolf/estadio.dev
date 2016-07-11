@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Commands\Inspire::class,
+        Commands\ScheduleTournamentCommand::class,
+        Commands\StartTournamentCommand::class,
+        Commands\ResolveTournamentCommand::class
     ];
 
     /**
@@ -24,7 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('tournament:check')
+                    ->everyMinute()
+                    ->withoutOverlapping()
+                    ->sendOutputTo('scheduleLog.txt');
     }
 }

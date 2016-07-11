@@ -53,7 +53,8 @@ class ControladorTorneo extends Controller
         $torneo->descripcion = $request['descripcion'];
         $torneo->formato = $request['formato'];
         $torneo->save();
-        return "Torneo creado!";
+        $request->session()->flash('alert-success', "Torneo creado!");
+        return redirect()->route('torneo.index');
     }
 
     /**

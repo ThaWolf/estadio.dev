@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePoolsUsersTable extends Migration
+class CreateSportTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,11 @@ class CreatePoolsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('pools_users', function (Blueprint $table) {
-        $table->integer('pool_id');
-        $table->integer('user_id');
-           
-    });
-
+        Schema::create('sport', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+            $table->string('name');
+        });
     }
 
     /**
@@ -27,6 +26,6 @@ class CreatePoolsUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pools_users');
+        Schema::drop('sport');
     }
 }
