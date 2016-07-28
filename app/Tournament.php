@@ -95,7 +95,11 @@ class Tournament extends Model
 		if(!$this->canParticipate($user)){
 			return false;
 		}
-		$this->participants()->attach($this->participantForUser($user));
+		$participant = $this->participantForUser($user);
+		if($this->haveTeams() && !$participant->isValid()){
+			return false;
+		}
+		$this->participants()->attach($participant);
 		return true;
 	}
 

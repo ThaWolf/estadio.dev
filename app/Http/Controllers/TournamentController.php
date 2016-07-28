@@ -72,9 +72,10 @@ class TournamentController extends Controller
         } else {
             if($tournament->isSubscribed($user)){
                 $request->session()->flash('alert-warning', 'Ya estabas subscripto');
-            } else {
-                $tournament->subscribe($user);
+            } else if($tournament->subscribe($user)){
                 $request->session()->flash('alert-success', 'Te subscribiste al torneo!!');
+            } else {
+                $request->session()->flash('alert-danger', 'Tu equipo no cumple con los reglamentos del torneo');
             }
         }
         return redirect()->route('tournament.view', [ 'id' => $id ]);
