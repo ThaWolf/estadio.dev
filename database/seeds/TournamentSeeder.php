@@ -3,8 +3,8 @@
 use Illuminate\Database\Seeder;
 
 use App\Tournament;
-
 use App\User;
+use App\SportPlayer;
 
 class TournamentSeeder extends Seeder
 {
@@ -15,16 +15,16 @@ class TournamentSeeder extends Seeder
      */
     public function run()
     {
+        $sportPlayers = SportPlayer::with('user')->where('sport_id', '1')->get();
     	$tournament = Tournament::create([
             'name' => 'tournament',
             'start_time' => new DateTime(),
-            'needed_players' => 8,
+            'needed_players' => 4,
             'creator_id' => 1,
             'sport_id' => 1
         ]);
-        $users = User::all();
-        foreach(range(1, 8) as $index) {
-            $tournament->participants()->attach($users[$index]);
+        foreach($sportPlayers as $player){
+            $tournament->participants()->attach($player->user);
         }
         $tournament->save();
     }

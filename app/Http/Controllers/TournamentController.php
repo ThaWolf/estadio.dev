@@ -35,24 +35,19 @@ class TournamentController extends Controller
      */
     public function show(Request $request, $id)
     {
+        $user = $request->user();
         $tournament = Tournament::with([
         		'rounds', 'current_round', 
         		'sport', 'creator', 'participants'
         	])->findOrFail($id);
-        $isCreator = $request->user()->id == $tournament->creator->id;
-        if($tournament->status == 'NotStarted'){
-        	$canShowSubscribe = !$tournament->hasEnoughtPlayers();
-        } else {
-        	$canShowSubscribe = false;
-        }
-        $canShowUnsubscribe = ($tournament->status == 'NotStarted');
-        if($tournament->haveTeams()){
-            $canShowUnsubscribe = false;
-        } else {
-            $canShowUnsubscribe &= $tournament->participants->contains($request->user());
-        }
-        if($canShowUnsubscribe){
+        $isCreator = $user->id == $tournament->creator->id;
+        $canParticipate = ($tournament->status == 'NotStarted') && $tournament->canParticipate($user);
+        if($tournament->isSubscribed($user)){
             $canShowSubscribe = false;
+            $canShowUnsubscribe = $canParticipate;
+        } else {
+            $canShowSubscribe = $canParticipate && !$tournament->hasEnoughtPlayers();
+            $canShowUnsubscribe = false;
         }
         return view ('tournament.view', [ 
         	'tournament' => $tournament, 
@@ -66,21 +61,20 @@ class TournamentController extends Controller
     * Subscribe a user or a team to a tournament
     **/
     public function subscribe(Request $request, $id){
+        $user = $request->user();
         $tournament = Tournament::with(['participants'])->findOrFail($id);
         if($tournament->status != 'NotStarted'){
             $request->session()->flash('alert-danger', 'No se puede subscribir a un torneo empezado');
         } else if($tournament->hasEnoughtPlayers()){
             $request->session()->flash('alert-danger', 'El torneo ya tiene la cantidad maxima de jugadores');
+        } else if($tournament->canParticipate($user)){
+            $request->session()->flash('alert-danger', 'No te podes subscribir a este torneo');
         } else {
-            if($tournament->haveTeams()){
-                $request->session()->flash('alert-danger', 'Sin implementar');
+            if($tournament->isSubscribed($user)){
+                $request->session()->flash('alert-warning', 'Ya estabas subscripto');
             } else {
-                if($tournament->participants->contains($request->user())){
-                    $request->session()->flash('alert-warning', 'Ya estabas subscripto');
-                } else {
-                    $tournament->participants()->attach($request->user());
-                    $request->session()->flash('alert-success', 'Te subscribiste al torneo!!');
-                }
+                $tournament->subscribe($user);
+                $request->session()->flash('alert-success', 'Te subscribiste al torneo!!');
             }
         }
         return redirect()->route('tournament.view', [ 'id' => $id ]);
@@ -90,19 +84,18 @@ class TournamentController extends Controller
     * Subscribe a user or a team to a tournament
     **/
     public function unsubscribe(Request $request, $id){
+        $user = $request->user();
         $tournament = Tournament::with(['participants'])->findOrFail($id);
         if($tournament->status != 'NotStarted'){
             $request->session()->flash('alert-danger', 'No se puede desubscribir a un torneo empezado');
+        } else if($tournament->canParticipate($user)){
+            $request->session()->flash('alert-danger', 'No te podes desubscribir a este torneo');
         } else {
-            if($tournament->haveTeams()){
-                $request->session()->flash('alert-danger', 'Sin implementar');
+            if($tournament->isSubscribed($user)){
+                $tournament->unsubscribe($user);
+                $request->session()->flash('alert-success', 'Te desubscribiste del torneo');
             } else {
-                if($tournament->participants->contains($request->user())){
-                    $tournament->participants()->detach($request->user());
-                    $request->session()->flash('alert-success', 'Te desubscribiste del torneo');
-                } else {
-                    $request->session()->flash('alert-warning', 'No estabas subscripto al torneo');
-                }
+                $request->session()->flash('alert-warning', 'No estabas subscripto al torneo');
             }
         }
         return redirect()->route('tournament.view', [ 'id' => $id ]);

@@ -67,5 +67,36 @@ class Tournament extends Model
 	public function haveTeams(){
 		return $this->type == 'Team';
 	}
+
+	public function canParticipate($user){
+		if($this->haveTeams()){
+			return false;
+		}
+		$accounts = $user->accounts()->forSport($this->sport)->count();
+		return ($accounts > 0);
+	}
+
+	public function isSubscribed($user){
+		if(!$this->canParticipate($user)){
+			return false;
+		}
+		return $tournament->participants->contains($user);
+	}
+
+	public function subscribe($user){
+		if(!$this->canParticipate($user)){
+			return false;
+		}
+		$tournament->participants()->attach($user);
+		return true;
+	}
+
+	public function unsubscribe($user){
+		if(!$this->canParticipate($user)){
+			return false;
+		}
+		$tournament->participants()->detach($user);
+		return true;
+	}
     
 }

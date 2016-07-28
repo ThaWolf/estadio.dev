@@ -24,6 +24,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function accounts(){
+        return $this->hasMany('App\SportPlayer', 'user_id');
+    }
+
     public function tournaments(){
         return $this->morphToMany('App\Tournament' , 'tournament', 'tournament_participant');
     }
