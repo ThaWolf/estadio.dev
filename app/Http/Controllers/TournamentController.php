@@ -67,7 +67,7 @@ class TournamentController extends Controller
             $request->session()->flash('alert-danger', 'No se puede subscribir a un torneo empezado');
         } else if($tournament->hasEnoughtPlayers()){
             $request->session()->flash('alert-danger', 'El torneo ya tiene la cantidad maxima de jugadores');
-        } else if($tournament->canParticipate($user)){
+        } else if(!$tournament->canParticipate($user)){
             $request->session()->flash('alert-danger', 'No te podes subscribir a este torneo');
         } else {
             if($tournament->isSubscribed($user)){
@@ -88,7 +88,7 @@ class TournamentController extends Controller
         $tournament = Tournament::with(['participants'])->findOrFail($id);
         if($tournament->status != 'NotStarted'){
             $request->session()->flash('alert-danger', 'No se puede desubscribir a un torneo empezado');
-        } else if($tournament->canParticipate($user)){
+        } else if(!$tournament->canParticipate($user)){
             $request->session()->flash('alert-danger', 'No te podes desubscribir a este torneo');
         } else {
             if($tournament->isSubscribed($user)){

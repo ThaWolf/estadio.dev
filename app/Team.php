@@ -15,6 +15,16 @@ class Team extends Model
     {
         return $query->where('sport_id', $sport->id);
     }
+    
+    /**
+     * Scope a query to only include teams where the user is ower or captain
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeForUser($query, $user){
+        return $query->where('owner_id', $user->id)
+            ->orWhere('captain_id', $user->id);
+    }
 
     public function sport(){
         return $this->belongsTo('App\Sport');
@@ -22,6 +32,10 @@ class Team extends Model
 
     public function captain(){
     	return $this->belongsTo('App\User');
+    }
+
+    public function owner(){
+        return $this->belongsTo('App\User');
     }
 
     public function players(){

@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Team;
+
 class User extends Authenticatable
 {
     /**
@@ -53,6 +55,18 @@ class User extends Authenticatable
 
     public function captainTeams(){
         return $this->hasMany('App\Team', 'captain_id');
+    }
+
+    public function ownerTeams(){
+        return $this->hasMany('App\Team', 'owner_id');
+    }
+
+    public function hasTeamForSport($sport){
+        return (Team::forUser($user)->forSport($sport)->count()) > 0;
+    }
+
+    public function teamForSport($sport){
+        return Team::forUser($user)->forSport($sport)->get();
     }
 
 }
