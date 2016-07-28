@@ -6,6 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
+     /**
+     * Scope a query to only include teams for the sport
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeForSport($query, $sport)
+    {
+        return $query->where('sport_id', $sport->id);
+    }
+
+    public function sport(){
+        return $this->belongsTo('App\Sport');
+    }
+
     public function captain(){
     	return $this->belongsTo('App\User');
     }
@@ -31,5 +45,13 @@ class Team extends Model
     public function win_matches()
     {
         return $this->morphMany('App\Match', 'winner');
+    }
+
+    public function isValid(){
+        $playerCount = $this->players()->count();
+        if($this->sport->min_team_players > $playerCount){
+            return false;
+        }
+        return ($this->sport->max_team_players <= $playerCount);
     }
 }
