@@ -38,6 +38,19 @@
                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
               </ul>
             </li>
+            @if (Auth::user()->notifications()->count() > 0)
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <i class="fa fa-bell"></i> <span class="caret"></span>
+              </a>
+
+              <ul class="dropdown-menu" role="menu">
+                @foreach (Auth::user()->notifications as $notification)
+                  <li><a href="{{ $notification->link }}">{{ $notification->description }}</a></li>
+                @endforeach
+              </ul>
+            </li>
+            @endif
           @endif
         </ul>
       </div>

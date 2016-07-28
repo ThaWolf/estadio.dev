@@ -69,4 +69,8 @@ class User extends Authenticatable
         return Team::forUser($user)->forSport($sport)->get();
     }
 
+    public function notifications(){
+        return $this->hasMany('App\UserNotification')->orderBy('id', 'desc');
+    }
+
 }
