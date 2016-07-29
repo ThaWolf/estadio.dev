@@ -67,7 +67,7 @@ class StartTournamentCommand extends Command
             $tournament->current_round()->associate($round);
             $tournament->save();
             // Create matches
-            $players = $tournament->participants;
+            $players = $tournament->participants()->get();
             while($players->count() > 0){
                 $matchPlayers = $players->random(2);
                 $players = $players->diff($matchPlayers);

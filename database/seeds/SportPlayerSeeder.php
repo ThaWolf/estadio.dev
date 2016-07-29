@@ -16,7 +16,7 @@ class SportPlayerSeeder extends Seeder
     public function run()
     {
     	$sport_ids = collect(range(1,2));
-        foreach(range(1, 10) as $index) {
+        foreach(range(2, 11) as $index) {
         	$sport_id = $sport_ids->random();
         	SportPlayer::create([
         		'user_id' => $index,

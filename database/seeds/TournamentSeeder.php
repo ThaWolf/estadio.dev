@@ -27,5 +27,13 @@ class TournamentSeeder extends Seeder
             $tournament->participants()->attach($player->user);
         }
         $tournament->save();
+        Tournament::create([
+            'name' => 'team tournament',
+            'start_time' => new DateTime(),
+            'needed_players' => 2,
+            'creator_id' => 1,
+            'sport_id' => 1,
+            'type' => 'Team'
+        ]);
     }
 }

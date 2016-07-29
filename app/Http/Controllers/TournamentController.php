@@ -38,7 +38,7 @@ class TournamentController extends Controller
         $user = $request->user();
         $tournament = Tournament::with([
         		'rounds', 'current_round', 
-        		'sport', 'creator', 'participants'
+        		'sport', 'creator'
         	])->findOrFail($id);
         $isCreator = $user->id == $tournament->creator->id;
         $canParticipate = ($tournament->status == 'NotStarted') && $tournament->canParticipate($user);
@@ -62,7 +62,7 @@ class TournamentController extends Controller
     **/
     public function subscribe(Request $request, $id){
         $user = $request->user();
-        $tournament = Tournament::with(['participants'])->findOrFail($id);
+        $tournament = Tournament::findOrFail($id);
         if($tournament->status != 'NotStarted'){
             $request->session()->flash('alert-danger', 'No se puede subscribir a un torneo empezado');
         } else if($tournament->hasEnoughtPlayers()){
@@ -86,7 +86,7 @@ class TournamentController extends Controller
     **/
     public function unsubscribe(Request $request, $id){
         $user = $request->user();
-        $tournament = Tournament::with(['participants'])->findOrFail($id);
+        $tournament = Tournament::findOrFail($id);
         if($tournament->status != 'NotStarted'){
             $request->session()->flash('alert-danger', 'No se puede desubscribir a un torneo empezado');
         } else if(!$tournament->canParticipate($user)){

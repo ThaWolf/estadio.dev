@@ -62,11 +62,11 @@ class User extends Authenticatable
     }
 
     public function hasTeamForSport($sport){
-        return (Team::forUser($user)->forSport($sport)->count()) > 0;
+        return (Team::forUser($this)->forSport($sport)->count()) > 0;
     }
 
     public function teamForSport($sport){
-        return Team::forUser($user)->forSport($sport)->get();
+        return Team::forUser($this)->forSport($sport)->get()->first();
     }
 
     public function notifications(){

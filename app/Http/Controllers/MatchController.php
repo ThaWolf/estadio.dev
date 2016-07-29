@@ -27,14 +27,8 @@ class MatchController extends Controller
         $match = Match::with(['reports', 'local', 'away', 'winner', 'round'])->findOrFail($id);
         $tournament = $match->round->tournament;
         $canShowReports = $request->user()->id == $tournament->creator->id;
-        if($tournament->haveTeams()){
-        	$canMakeReport = false;
-        	// TODO: implement teams
-        } else {
-        	$canMakeReport = collect([ $match->local->id, $match->away->id ])
-        		->contains($request->user()->id);
-            $canMakeReport &= ($match->status != 'Finished');
-        }
+    	$canMakeReport = $match->canMakeReport($request->user());
+        $canMakeReport &= ($match->status != 'Finished');
         $currentReport = new MatchUserReport;
         if($canMakeReport){
             $localReport = $currentReport;
@@ -46,7 +40,7 @@ class MatchController extends Controller
                     $awayReport = $report;
                 }
             }
-            if($match->local->id == $request->user()->id){
+            if($match->isLocal($request->user())){
                 $currentReport = $localReport;
             } else {
                 $currentReport = $awayReport;
@@ -63,20 +57,15 @@ class MatchController extends Controller
     public function report(Request $request, $id){
         $match = Match::findOrFail($id);
         $tournament = $match->round->tournament;
-        if($tournament->haveTeams()){
-            $canMakeReport = false;
-            // TODO: implement teams
-        } else {
-            $canMakeReport = collect([ $match->local->id, $match->away->id ])
-                ->contains($request->user()->id);
-        }
+        $canMakeReport = $match->canMakeReport($request->user());
         if(!$canMakeReport){
             $request->session()->flash('alert-danger', 'No podes reportar en este partido');
         } else if($match->status == 'Finished'){
             $request->session()->flash('alert-danger', 'No podes cambiar el reporte de un partido terminado');
         } else {
-            $participant = 'Local';
-            if($match->away->id == $request->user()->id){
+            if($match->isLocal($request->user())){
+                $participant = 'Local';
+            } else {
                 $participant = 'Away';
             }
             $isNew = true;

@@ -88,7 +88,7 @@ class Tournament extends Model
 		if(!$this->canParticipate($user)){
 			return false;
 		}
-		return $this->participants->contains($this->participantForUser($user));
+		return $this->participants()->get()->contains($this->participantForUser($user));
 	}
 
 	public function subscribe($user){

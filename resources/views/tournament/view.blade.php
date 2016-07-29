@@ -18,26 +18,23 @@
             @endif
         </span>
     </h4>
+    <div>
+        Deporte: {{ $tournament->sport->name }}
+    </div>
     
     @if($canShowSubscribe)
         {!!Form::open(['route' => ['tournament.subscribe', $tournament->id], 'method' => 'POST']) !!}
-            @if($tournament->haveTeams())
-                <h4>TODO</h4>
-            @endif
             {!!Form::submit( 'Subscribite', ['class' => 'btn btn-primary']) !!}
         {!!Form::close() !!}
     @endif
     @if($canShowUnsubscribe)
         {!!Form::open(['route' => ['tournament.unsubscribe', $tournament->id], 'method' => 'POST']) !!}
-            @if($tournament->haveTeams())
-                <h4>TODO</h4>
-            @endif
             {!!Form::submit( 'Retirate', ['class' => 'btn btn-primary']) !!}
         {!!Form::close() !!}
     @endif
 
     <h3>Subscripciones: </h3>
-    @foreach ($tournament->participants as $participant)
+    @foreach ($tournament->participants()->get() as $participant)
         <span style="margin-right: 5px;">{{ $participant->name }}</span>
     @endforeach
 

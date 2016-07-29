@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Match extends Model
 {
@@ -27,6 +28,28 @@ class Match extends Model
 	public function reports(){
 		return $this->hasMany('App\MatchUserReport');
 	}
+
+	public function isLocal($user){
+		if($this->round->tournament->haveTeams()){
+			return $this->local_id == $user->teamForSport($this->round->tournament->sport)->id;
+		} else {
+			return $this->local_id == $user->id;
+		}
+	}
+
+	public function canMakeReport($user){
+		$teamCollection = collect([ $this->local->id, $this->away->id ]);
+        if($this->round->tournament->haveTeams()){
+        	if($user->hasTeamForSport($this->round->tournament->sport)){
+        		$participantId = $user->teamForSport($this->round->tournament->sport)->id;
+        	} else {
+        		$participantId = 'invalid';
+        	}
+        } else {
+        	$participantId = $user->id;	
+        }
+    	return $teamCollection->contains($participantId);
+    }
 
 	/**
 	* Resolves a match status from the players requests

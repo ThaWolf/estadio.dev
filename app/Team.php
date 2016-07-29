@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
+    protected $table = 'team';
      /**
      * Scope a query to only include teams for the sport
      *
@@ -42,6 +43,10 @@ class Team extends Model
     	return $this->belongsToMany('App\User' , 'team_user');
     }
 
+    public function invites(){
+        return $this->belongsToMany('App\User' , 'team_invites');
+    }
+
     public function tournaments(){
         return $this->morphToMany('App\Tournament' , 'tournament', 'tournament_participant');
     }
@@ -66,6 +71,6 @@ class Team extends Model
         if($this->sport->min_team_players > $playerCount){
             return false;
         }
-        return ($this->sport->max_team_players <= $playerCount);
+        return ($playerCount <= $this->sport->max_team_players);
     }
 }

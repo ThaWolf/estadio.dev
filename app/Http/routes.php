@@ -30,5 +30,11 @@ Route::post('/tournament/{id}/resolve', ['as' => 'tournament.resolve', 'uses' =>
 Route::get('/match/{id}', ['as' => 'match.view', 'uses' => 'MatchController@show']);
 Route::post('/match/{id}/report', ['as' => 'match.report', 'uses' => 'MatchController@report']);
 Route::post('/match/{id}/resolve', ['as' => 'match.resolve', 'uses' => 'MatchController@resolve']);
+// Team controller routes
+Route::get('/team/{id}', ['as' => 'team.view', 'uses' => 'TeamController@show']);
+Route::post('/team/{id}/fire', ['as' => 'team.fire', 'uses' => 'TeamController@fire']);
+Route::post('/team/{id}/invite', ['as' => 'team.invite', 'uses' => 'TeamController@invite']);
+Route::post('/team/{id}/invite/accept', ['as' => 'team.invite.accept', 'uses' => 'TeamController@accept']);
+Route::post('/team/{id}/invite/decline', ['as' => 'team.invite.decline', 'uses' => 'TeamController@decline']);
 
 
