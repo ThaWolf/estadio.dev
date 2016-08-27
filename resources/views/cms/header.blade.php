@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-inverse navbar-static-top">
     <div class="container">
       <div class="navbar-header">
 
@@ -11,9 +11,10 @@
         </button>
 
         <!-- Branding Image -->
-        <a class="navbar-brand" href="{{ url('/') }}">
-          E-stadio
-        </a>
+        <span class="navbar-brand" href="{{ url('/') }}">
+        <img alt="E-Stadio" src="{{ asset('img/ref/logo.png') }}">
+          
+        </span>
       </div>
 
       <div class="collapse navbar-collapse" id="app-navbar-collapse">
