@@ -140,7 +140,7 @@
                         $(".brackets").brackets({
                             titles: titles,
                             rounds: rounds,
-                            color_title: 'black',
+                            color_title: '#A8A8A1',
                             border_color: '#00F',
                             color_player: 'black',
                             bg_player: 'white',

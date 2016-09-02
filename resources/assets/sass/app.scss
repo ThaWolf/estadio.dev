@@ -9,3 +9,30 @@ body {
 .navbar-brand {
 	padding: 0px 15px;
 }
+
+.img-thumbnail {
+	padding: 0px;
+}
+
+/* Brackets color override */
+$brackets-color: #fff;
+$brackets-border: #ddd;
+$brackets-bg: #332C2F;
+$brackets-bg-active: #252022;
+
+body .container-brackets {
+	.separator-brackets .line {
+		border-color: $brackets-border;
+	}
+	.round .match .player {
+		&.hover {
+			background-color: $brackets-bg-active;
+		}
+		.name {
+			color: $brackets-color;
+		}
+		border-color: $brackets-border;
+		background-color: $brackets-bg;
+	}
+	
+}
