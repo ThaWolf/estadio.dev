@@ -27,19 +27,7 @@ class HomeController extends Controller
         return redirect()->route('tournament.list');
     }
 
-    public function testHome(){
-         return view ('pruebahome');
-    }
-
     public function testProfile(){
          return view ('profileview');
-    }
-
-    public function testTeam(){
-         return view ('teamview');
-    }
-
-    public function testTest(){
-         return view ('testview');
     }
 }

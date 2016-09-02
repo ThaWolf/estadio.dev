@@ -31,7 +31,7 @@ class User extends Authenticatable
     }
 
     public function tournaments(){
-        return $this->morphToMany('App\Tournament' , 'tournament', 'tournament_participant');
+        return $this->morphToMany('App\Tournament' , 'participant', 'tournament_participant');
     }
 
     public function created_tournaments(){

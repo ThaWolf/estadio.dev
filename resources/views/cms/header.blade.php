@@ -11,10 +11,9 @@
         </button>
 
         <!-- Branding Image -->
-        <span class="navbar-brand" href="{{ url('/') }}">
-        <img alt="E-Stadio" src="{{ asset('img/ref/logo.png') }}">
-          
-        </span>
+        <a class="navbar-brand" href="{{ url('/') }}">
+          <img alt="E-Stadio" src="{{ asset('img/ref/logo.png') }}">
+        </a>
       </div>
 
       <div class="collapse navbar-collapse" id="app-navbar-collapse">

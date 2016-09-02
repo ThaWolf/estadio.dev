@@ -14,16 +14,9 @@
 Route::get('/', function () {
     return redirect()->route('tournament.list');
 });
-
-Route::get('/test/home', 'HomeController@testHome');
 Route::get('/test/profile', 'HomeController@testProfile');
-Route::get('/test/team', 'HomeController@testTeam');
-Route::get('/test/test', 'HomeController@testTest');
-
 
 Route::auth();
-
-Route::get('/home', 'HomeController@index');
 
 
 // Tournament controller routes

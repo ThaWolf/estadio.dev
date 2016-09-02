@@ -10,8 +10,12 @@ body {
 	padding: 0px 15px;
 }
 
-.img-thumbnail {
+.img-thumbnail, .thumbnail {
 	padding: 0px;
+}
+
+.table > tbody > tr:first-child > td {
+	border-top-color: transparent;
 }
 
 /* Brackets color override */

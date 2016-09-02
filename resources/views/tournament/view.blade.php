@@ -2,23 +2,35 @@
 
 @section('content')
 
-<h4>
-    Torneo: {{ $tournament->name }}
-    <span style="margin-left: 5px;">Deporte: {{ $tournament->sport->name }}</span>
-    <span style="margin-left: 10px; display: inline-block;">
-        @if($isCreator && ($tournament->status != 'Finished'))
-            @if($tournament->status == 'NotStarted')
-                {!!Form::open(['route' => ['tournament.start', $tournament->id], 'method' => 'POST']) !!}
-                    {!!Form::submit( 'Empezar torneo ahora', ['class' => 'btn btn-primary']) !!}
-                {!!Form::close() !!}
-            @else
-                {!!Form::open(['route' => ['tournament.resolve', $tournament->id], 'method' => 'POST']) !!}
-                    {!!Form::submit( 'Resolver ronda ahora', ['class' => 'btn btn-primary']) !!}
-                {!!Form::close() !!}
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-xs-4" style="text-align: right;">
+        <div>
+            <h3>{{ $tournament->sport->name }}</h3>      
+        </div>
+        <div style="margin-top: 10px; margin-bottom: 10px;">
+            <h2>{{ $tournament->name }}</h2>        
+        </div>
+        <div>
+            @if($isCreator && ($tournament->status != 'Finished'))
+                @if($tournament->status == 'NotStarted')
+                    {!!Form::open(['route' => ['tournament.start', $tournament->id], 'method' => 'POST']) !!}
+                        {!!Form::submit( 'Empezar torneo ahora', ['class' => 'btn btn-primary']) !!}
+                    {!!Form::close() !!}
+                @else
+                    {!!Form::open(['route' => ['tournament.resolve', $tournament->id], 'method' => 'POST']) !!}
+                        {!!Form::submit( 'Resolver ronda ahora', ['class' => 'btn btn-primary']) !!}
+                    {!!Form::close() !!}
+                @endif
             @endif
-        @endif
-    </span>
-</h4>
+        </div>
+    </div>
+    <div class="col-xs-8">
+        <div class="row">
+            <img src="{{ asset('img/torneos/overwatch.png') }}"  class="img-responsive" style="max-height: 300px;">
+        </div>
+    </div>
+    
+</div>
 <div class="tabbable-panel">
     <div class="tabbable-line">
         <ul class="nav nav-tabs nav-justified">
@@ -34,17 +46,8 @@
     <!-- General Data -->
     <div class="tab-pane fade in active" id="detalles">
         <div class="panel-body">
-            <div class="row">
-                <img src="{{ asset('img/torneos/overwatch.png') }}"  class="img-responsive">
-            </div>
-        </div>
-        <div class="panel-body">
             <h1>Reglas</h1>
-            <p>
-                Bacon ipsum dolor amet venison shankle spare ribs, t-bone pork loin picanha hamburger cupim swine ground round alcatra filet mignon pancetta. Capicola porchetta meatloaf pastrami shank salami cow t-bone hamburger. Frankfurter alcatra salami tail pork loin ball tip. Porchetta fatback drumstick, landjaeger pastrami jowl ground round flank kielbasa hamburger filet mignon. Kielbasa prosciutto ribeye frankfurter rump biltong short ribs pork belly chicken alcatra sausage shankle ground round. -->
-
-                Cupim brisket chicken, pork prosciutto beef ribs turkey ham hock leberkas strip steak filet mignon kevin meatloaf. Rump bresaola tongue turducken. Capicola ham hock tongue strip steak shoulder cupim. Flank kielbasa picanha, spare ribs prosciutto pig tri-tip ground round shoulder biltong short ribs jowl cow strip steak. Picanha beef ribs frankfurter, bresaola leberkas drumstick ground round ribeye alcatra brisket.
-            </p>
+            <p>{{ $tournament->description }}</p>
         </div>
     </div>
     <!-- People -->
@@ -62,7 +65,7 @@
                         {!!Form::submit( 'Retirate', ['class' => 'btn btn-primary']) !!}
                     {!!Form::close() !!}
                 @endif 
-            <h1>
+            </h1>
             <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="32" aria-valuemin="0" aria-valuemax="64" style="min-width: 2em; width: {{$tournament->participants()->count() * 100/$tournament->needed_players}}%;">
                     <p align="center">{{$tournament->participants()->count() * 100/$tournament->needed_players}}%</p>
@@ -77,7 +80,9 @@
                         </a>
                         <div class="media-body">
                             <h3 class="media-heading"><strong><a href="#">{{ $participant->name }}</a></strong></h3>
-                            <p class="small">Nalguidan#1134</p>
+                            @if(!$tournament->haveTeams())
+                            <p class="small">{{ $participant->accounts()->forSport($tournament->sport)->first()->name }}</p>
+                            @endif
                         </div>
                     </div>   
                 </div>

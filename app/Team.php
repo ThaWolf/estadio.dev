@@ -48,7 +48,7 @@ class Team extends Model
     }
 
     public function tournaments(){
-        return $this->morphToMany('App\Tournament' , 'tournament', 'tournament_participant');
+        return $this->morphToMany('App\Tournament' , 'participant', 'tournament_participant');
     }
 
     public function local_matches()
