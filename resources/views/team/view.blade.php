@@ -9,19 +9,19 @@
 	</div>
 	<div class="col-md-9">
 		<h1 style="color:white;"> {{$team->name}}</h1>
+    @if($hasInvite)
+    <div class="invite-form">
+      Fuiste invitado a este equipo
+      {!!Form::open(['route' => ['team.invite.accept', $team->id], 'method' => 'POST']) !!}
+            {!!Form::submit( 'Aceptar', ['class' => 'btn btn-success']) !!}
+        {!!Form::close() !!}
+        {!!Form::open(['route' => ['team.invite.decline', $team->id], 'method' => 'POST']) !!}
+            {!!Form::submit( 'Declinar', ['class' => 'btn btn-danger']) !!}
+        {!!Form::close() !!}
+    </div>
+    @endif
 	</div>
 </div>
-@if($hasInvite)
-<div>
-	Fuiste invitado a este equipo
-	{!!Form::open(['route' => ['team.invite.accept', $team->id], 'method' => 'POST']) !!}
-        {!!Form::submit( 'Aceptar', ['class' => 'btn btn-success']) !!}
-    {!!Form::close() !!}
-    {!!Form::open(['route' => ['team.invite.decline', $team->id], 'method' => 'POST']) !!}
-        {!!Form::submit( 'Declinar', ['class' => 'btn btn-danger']) !!}
-    {!!Form::close() !!}
-</div>
-@endif
 <!-- Tabs -->
 <div class="tabbable-panel" style="margin-top: 10px;">
     <div class="tabbable-line">

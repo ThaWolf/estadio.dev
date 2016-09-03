@@ -61,6 +61,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Team', 'owner_id');
     }
 
+    public function teams(){
+        return $this->belongsToMany('App\Team', 'team_user');
+    }
+
     public function hasTeamForSport($sport){
         return (Team::forUser($this)->forSport($sport)->count()) > 0;
     }

@@ -5749,6 +5749,10 @@ body {
 .table > tbody > tr:first-child > td {
   border-top-color: transparent; }
 
+.invite-form form {
+  display: inline-block;
+  margin-left: 5px; }
+
 /* Brackets color override */
 body .container-brackets .separator-brackets .line {
   border-color: #ddd; }

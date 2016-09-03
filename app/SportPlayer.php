@@ -11,6 +11,15 @@ class SportPlayer extends Model
 	protected $primaryKey = array('sport_id', 'user_id');
 	protected $table = 'sport_player';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'sport_id', 'user_id', 'name',
+    ];
+
 	/**
      * Scope a query to only include teams for the sport
      *

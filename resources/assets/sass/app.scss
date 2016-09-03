@@ -18,6 +18,13 @@ body {
 	border-top-color: transparent;
 }
 
+.invite-form {
+	form {
+		display: inline-block;
+		margin-left: 5px;
+	}
+}
+
 /* Brackets color override */
 $brackets-color: #fff;
 $brackets-border: #ddd;
