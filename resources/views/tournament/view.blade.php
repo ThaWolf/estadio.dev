@@ -79,9 +79,20 @@
                             <img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 64px; height: 64px;" src="/img/torneos/placehodor.png">      
                         </a>
                         <div class="media-body">
-                            <h3 class="media-heading"><strong><a href="#">{{ $participant->name }}</a></strong></h3>
                             @if(!$tournament->haveTeams())
+                            <h3 class="media-heading"><strong>
+                                <a href="{{ route('user.profile', [ 'id' => $participant->id ]) }}">
+                                    {{ $participant->name }}
+                                </a>
+                            </strong></h3>
                             <p class="small">{{ $participant->accounts()->forSport($tournament->sport)->first()->name }}</p>
+                            @endif
+                            @if($tournament->haveTeams())
+                            <h3 class="media-heading"><strong>
+                                <a href="{{ route('team.view', [ 'id' => $participant->id ]) }}">
+                                    {{ $participant->name }}
+                                </a>
+                            </strong></h3>
                             @endif
                         </div>
                     </div>   

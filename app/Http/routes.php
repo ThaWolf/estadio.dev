@@ -38,5 +38,6 @@ Route::post('/team/{id}/invite/accept', ['as' => 'team.invite.accept', 'uses' =>
 Route::post('/team/{id}/invite/decline', ['as' => 'team.invite.decline', 'uses' => 'TeamController@decline']);
 // User controller routes
 Route::get('/user/profile', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
+Route::get('/user/{id}/profile', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
 Route::post('/user/{id}/account', ['as' => 'user.addAccount', 'uses' => 'UserController@addAccount']);
 

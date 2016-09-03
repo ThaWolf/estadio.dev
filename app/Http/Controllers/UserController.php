@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 use App\Http\Requests;
 
 use App\SportPlayer;
 use App\Sport;
+use App\User;
 
 class UserController extends Controller
 {
@@ -16,19 +18,30 @@ class UserController extends Controller
         $this->middleware('auth', ['except' => []]);
     }
 
-    public function profile(Request $request){
-    	$user = $request->user();
-    	$sportIds = [];
-    	foreach($user->accounts as $accounts){
-    		$sportIds[] = $accounts->sport_id;
+    public function profile(Request $request, $id = null){
+    	if($id == null){
+    		$id = $request->user()->id;
     	}
-    	$sports = Sport::whereNotIn('id', $sportIds)->lists('name', 'id');
+    	$user = User::findOrFail($id);
+    	if($id == $request->user()->id){
+			$sportIds = [];
+	    	foreach($user->accounts as $accounts){
+	    		$sportIds[] = $accounts->sport_id;
+	    	}
+	    	$sports = Sport::whereNotIn('id', $sportIds)->lists('name', 'id');
+    	} else {
+    		$sports = collect([]);
+    	}
+    	
         return view('user.view',[
         	'user' => $user,
         	'availableSports' => $sports
         ]);
     }
 
+    /**
+	* Adds an account to the current user
+    **/
     public function addAccount(Request $request, $id){
     	if($id != $request->user()->id){
     		$request->session()->flash('alert-danger', 'No podes agregar cuentas a otros usuarios');

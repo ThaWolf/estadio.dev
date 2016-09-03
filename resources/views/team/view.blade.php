@@ -45,7 +45,11 @@
 	                            <img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 64px; height: 64px;" src="/img/torneos/placehodor.png">      
 	                        </a>
 	                        <div class="media-body">
-	                            <h3 class="media-heading"><strong><a href="#">{{ $player->name }}</a></strong></h3>
+	                            <h3 class="media-heading"><strong>
+                                <a href="{{ route('user.profile', [ 'id' => $player->id ]) }}">
+                                  {{ $player->name }}
+                                </a>
+                              </strong></h3>
 	                            <p class="small">{{ $player->accounts()->forSport($team->sport)->first()->name }}</p>
 	                            @if($isOwner)
 								{!!Form::open(['route' => ['team.fire', $team->id], 'method' => 'POST']) !!}
