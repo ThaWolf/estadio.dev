@@ -1,29 +1,49 @@
 @extends('layouts.cms')
 
 @section('content')
+            
+                       
+        <div class="divide80"></div>
+        <div class="container">
 
+            <div class="center-heading">
+                <h2>Torneos</h2>
+                <span class="center-line"></span>
+            </div>   
 
-	<div class="container">
-		<h2>Bienvenido a E-Stadio</h2>
-		<p>
-			Este es un nuevo proyecto de pasion traido por aficionados a los deportes electronicos como vos!
-			<br />
-			Hartos de tener que saber 1000 idiomas para participar en un torneo nos decidimos a hacer una liga de torneos en español
-			<br />
-			Y llendo a lo concreto podes ver todos los torneos que nos eligen dia a dia
-		</p>
-	</div>
-
-	<div class="container">
-		<h3>Torneos</h3>
-		@foreach($tournaments as $tournament)
-	        <div class="col-xs-6 col-md-3">
-	            <a href="{{ route('tournament.view', [ 'id' => $tournament->id ]) }}"
-	             class="thumbnail" style="margin-bottom: 5px;">
-	                <img src="/img/torneos/placehodor.png" alt="{{ $tournament->name }}">
-	            </a>
-	        </div>
-	    @endforeach
-	</div>
+            <ul class="filter list-inline">
+                <li><a class="active" href="#" data-filter="*">Todos</a></li>
+                <li><a href="#" data-filter=".hs">Hearthstone</a></li>
+                <li><a href="#" data-filter=".ow">Overwatch</a></li>
+                <li><a href="#" data-filter=".lol">League of Legends</a></li>
+                <li><a href="#" data-filter=".csgo">Counter Strike GO</a></li>
+            </ul>
+            <div class="container">
+            @foreach($tournaments as $tournament)
+            <div class="col-xs-6 col-md-3">
+                <div class="portfolio-box iso-call col-2-space">
+                    
+                        <div class="item-img-wrap ">
+                            <img src="/img/torneos/placehodor.png" class="img-responsive" alt="{{ $tournament->name }}">
+                            <div class="item-img-overlay">
+                                <a href="{{ route('tournament.view', [ 'id' => $tournament->id ]) }}" class="show-image">
+                                    <span></span>
+                                </a>
+                            </div>
+                        </div> 
+                        <div class="work-desc">
+                            <h3><a href="{{ route('tournament.view', [ 'id' => $tournament->id ]) }}">{{ $tournament->name }}</a></h3>
+                            <span>Fecha (placeholder)</span>
+                        </div><!--work desc-->
+                    
+                </div>
+                </div>
+                @endforeach
+                </div>
+            </div>
+        
 
 @endsection
+
+
+   

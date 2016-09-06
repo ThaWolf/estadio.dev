@@ -17,7 +17,7 @@
    
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
     
-     <link href="{{asset('src/font-awesome/font-awesome.min.css')}}" rel="stylesheet">
+     <link href="{{asset('src/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
         <!-- flex slider css -->
         <link href="{{asset('src/css/flexslider.css')}}" rel="stylesheet" type="text/css" media="screen">
         <!-- animated css  -->
@@ -79,7 +79,8 @@
         @include('cms.alerts')
         @yield('content')
     </div>
-    
+    <div style="padding-top: 50px ">
     @include('cms.footer')
+    </div>
   </body>
 </html>
