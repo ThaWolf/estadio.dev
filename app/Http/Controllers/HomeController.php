@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('tournament.list');
+        return view ('cms.index');
     }
 
     public function testProfile(){
