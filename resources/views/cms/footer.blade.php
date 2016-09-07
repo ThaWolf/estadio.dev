@@ -1,5 +1,5 @@
 
-
+<footer id="footer">
 <div class="container">
 <div class="row">
                     <div class="col-md-12 col-sm-6 margin30">
@@ -61,3 +61,4 @@
                     </div>
                 </div>
             </div>
+            </footer>

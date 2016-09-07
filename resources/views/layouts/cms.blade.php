@@ -40,7 +40,7 @@
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-    <script src="{{asset('src/js/brackets.js') }}"></script>
+        
         <script src="{{asset('src/js/jquery.min.js')}}"></script>
         <script src="{{asset('src/js/jquery-migrate.min.js')}}"></script> 
         <!--bootstrap js plugin-->
@@ -62,13 +62,13 @@
         <script src="{{asset('src/js/owl.carousel.min.js')}}" type="text/javascript"></script>
         <!--popup js-->
         <script src="{{asset('src/js/jquery.magnific-popup.min.js')}}" type="text/javascript"></script>
-        <!--you tube player-->
-        <script src="{{asset('src/js/jquery.mb.YTPlayer.min.js')}}" type="text/javascript"></script>        
+        <!--you tube player-->      
         <!--customizable plugin edit according to your needs-->
         <script src="{{asset('src/js/custom.js')}}" type="text/javascript"></script>
         <script type="text/javascript" src="{{asset('src/rs-plugin/js/jquery.themepunch.tools.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('src/rs-plugin/js/jquery.themepunch.revolution.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('src/js/revolution-custom.js')}}"></script>
+        <script src="{{asset('src/js/brackets.js')}}"></script>
         
         
   </head>
@@ -79,7 +79,7 @@
         @include('cms.alerts')
         @yield('content')
     </div>
-    <div style="padding-top: 50px ">
+    <div style="padding-top: 120px ">
     @include('cms.footer')
     </div>
   </body>

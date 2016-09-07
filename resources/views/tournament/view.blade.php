@@ -24,13 +24,16 @@
             @endif
         </div>
     </div>
-    <div class="col-xs-8">
-        <div class="row">
-            <img src="{{ asset('img/torneos/overwatch.png') }}"  class="img-responsive" style="max-height: 300px;">
-        </div>
     </div>
+    <div class="container">
+    <div class="row">    
+            <img src="{{ asset('img/torneos/overwatch.png') }}"  class="img-responsive" style="max-height: 400px;margin: 0 auto; width: 97% ">
+        </div>
+        </div>
     
-</div>
+    
+
+<div class="container">
 <div class="tabbable-panel">
     <div class="tabbable-line">
         <ul class="nav nav-tabs nav-justified">
@@ -45,10 +48,51 @@
     <div class="tab-content">
     <!-- General Data -->
     <div class="tab-pane fade in active" id="detalles">
-        <div class="panel-body">
-            <h1>Reglas</h1>
-            <p>{{ $tournament->description }}</p>
+        
+                 
+            <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default" style="border-color: #32c5d2 ">
+                    <div class="panel-heading" style="background-color: #32c5d2 ">
+                    <h3 class="panel-title" >Titulo</h3>
+                    </div>
+                    <div class="panel-body" style="background-color: white">
+                        <h1>Reglas</h1>
+                        <p>{{ $tournament->description }}</p>
+                    </div>
+                </div>
+            </div>        
+
+
+            <div class="col-md-4">
+                <div class="panel panel-default" style="border-color: #32c5d2 ">
+                    <div class="panel-heading" style="background-color: #32c5d2 ">
+                    <h3 class="panel-title" ">Titulo</h3>
+                    </div>
+                    <div class="panel-body " style="background-color: white">
+                        <h1>Reglas</h1>
+                        <p>{{ $tournament->description }}</p>
+                    </div>
+                </div>
+            </div>   
+            </div>
+
+
+            <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default" style="border-color: #32c5d2 ">
+                    <div class="panel-heading" style="background-color: #32c5d2 ">
+                    <h3 class="panel-title" ">Titulo</h3>
+                    </div>
+                    <div class="panel-body " style="background-color: white">
+                        <h1>Reglas</h1>
+                        <p>{{ $tournament->description }}</p>
+                    </div>
+                </div>
+            </div>   
         </div>
+
+
     </div>
     <!-- People -->
     <div class="tab-pane fade" id="participantes">
@@ -180,5 +224,5 @@
     @endif
     </div>
 </div>
-
+</div>
 @endsection

@@ -18,7 +18,7 @@
                 <li><a href="#" data-filter=".lol">League of Legends</a></li>
                 <li><a href="#" data-filter=".csgo">Counter Strike GO</a></li>
             </ul>
-            <div class="container">
+            <div class="container" style="padding-top: 50px ">
             @foreach($tournaments as $tournament)
             <div class="col-xs-6 col-md-3">
                 <div class="portfolio-box iso-call col-2-space">
@@ -26,8 +26,8 @@
                         <div class="item-img-wrap ">
                             <img src="/img/torneos/placehodor.png" class="img-responsive" alt="{{ $tournament->name }}">
                             <div class="item-img-overlay">
-                                <a href="{{ route('tournament.view', [ 'id' => $tournament->id ]) }}" class="show-image">
-                                    <span></span>
+                                <a href="{{ route('tournament.view', [ 'id' => $tournament->id ]) }}" >
+                                    <span><br/><br/><br/>Info acerca del torneo</span>
                                 </a>
                             </div>
                         </div> 
