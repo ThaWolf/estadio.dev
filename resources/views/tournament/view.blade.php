@@ -25,12 +25,7 @@
         </div>
     </div>
     </div>
-    <div class="container">
-    <div class="row">    
-            <img src="{{ asset('img/torneos/overwatch.png') }}"  class="img-responsive" style="max-height: 400px;margin: 0 auto; width: 97% ">
-        </div>
-        </div>
-    
+      
     
 
 <div class="container">
@@ -48,30 +43,47 @@
     <div class="tab-content">
     <!-- General Data -->
     <div class="tab-pane fade in active" id="detalles">
-        
+            
+            <div style="min-width:940px; min-height: 400px; background: url({{ asset('img/torneos/overwatch.png')}}) no-repeat center; background-size: 100% 100%;" class="jumbotron jumbotron-main-bg">
+            </div>
+              
                  
             <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="panel panel-default" style="border-color: #32c5d2 ">
                     <div class="panel-heading" style="background-color: #32c5d2 ">
-                    <h3 class="panel-title" >Titulo</h3>
+                    <h3 class="panel-title" >Informacion General</h3>
                     </div>
                     <div class="panel-body" style="background-color: white">
-                        <h1>Reglas</h1>
-                        <p>{{ $tournament->description }}</p>
+                    <div class="col-md-6" style="text-align:left;">
+                           <h6><strong>Juego:</strong>Hearthstone</h6>
+                           <h6><strong>Servidor:</strong>Americas</h6>
+                           
+                    </div>
+                    <div class="col-md-6" style="text-align: left;">
+                           <h6><strong>Fecha:</strong>13/09/16</h6>
+                           <h6><strong>Hora:</strong>22:00hs (timzone)</h6>
+                    </div>
+
                     </div>
                 </div>
             </div>        
 
 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="panel panel-default" style="border-color: #32c5d2 ">
                     <div class="panel-heading" style="background-color: #32c5d2 ">
-                    <h3 class="panel-title" ">Titulo</h3>
+                    <h3 class="panel-title" ">Formato</h3>
                     </div>
                     <div class="panel-body " style="background-color: white">
-                        <h1>Reglas</h1>
-                        <p>{{ $tournament->description }}</p>
+                        <div class="col-md-6" style="text-align: left;">
+                           <h6>Individual (1vs1)</h6>
+                           <h6>Conquest</h6>                           
+                    </div>
+                    <div class="col-md-6" style="text-align: left;">
+                           <h6>Mejor de 3 (BO3)</h6>
+                           <h6>Final a 5 (BO5)</h6> 
+                           </div>
                     </div>
                 </div>
             </div>   
@@ -82,10 +94,18 @@
             <div class="col-md-12">
                 <div class="panel panel-default" style="border-color: #32c5d2 ">
                     <div class="panel-heading" style="background-color: #32c5d2 ">
-                    <h3 class="panel-title" ">Titulo</h3>
+                    <h3 class="panel-title" ">Reglas</h3>
                     </div>
                     <div class="panel-body " style="background-color: white">
-                        <h1>Reglas</h1>
+                        <p>
+                            Bacon ipsum dolor amet capicola tail pork belly, meatloaf short ribs drumstick frankfurter ground round sirloin bacon shankle corned beef ribeye porchetta hamburger. Shankle cupim filet mignon, capicola picanha leberkas short ribs. Landjaeger drumstick shank, andouille boudin swine sirloin filet mignon beef ribs ham tri-tip. Strip steak capicola pastrami alcatra tail chicken pig tri-tip bresaola rump fatback flank. Leberkas ground round pancetta salami, jowl tri-tip jerky. Swine kielbasa brisket capicola hamburger corned beef shoulder bacon ball tip landjaeger biltong tongue.
+
+                            Bresaola short ribs shank picanha pork ribeye pastrami spare ribs beef tri-tip pork belly kevin kielbasa bacon filet mignon. Biltong drumstick venison jerky ham ribeye boudin leberkas turducken corned beef. Kielbasa ham hock kevin porchetta. Drumstick bacon venison kevin prosciutto tri-tip, pork chop turkey meatloaf. Chicken brisket venison drumstick kielbasa porchetta hamburger doner tri-tip pork loin ribeye short loin leberkas. Short ribs landjaeger sausage shankle. Drumstick jowl pastrami, alcatra tri-tip pork belly meatball porchetta doner tongue filet mignon turducken ham.
+
+                            Boudin leberkas meatloaf, capicola tongue pork chop venison. Capicola sirloin ground round, meatball chicken pancetta corned beef short ribs pork belly. Flank chuck spare ribs pastrami. Filet mignon jerky shoulder doner pancetta ball tip jowl pig strip steak tongue. Cupim shankle pig tenderloin ribeye chuck. Flank shankle spare ribs, bresaola corned beef bacon porchetta kielbasa. Frankfurter venison t-bone pastrami.
+
+                            Shank pig jowl flank pork chop filet mignon shankle ground round, ham swine. Landjaeger ball tip cow meatball pancetta, cupim pork loin hamburger tongue rump pork pig pastrami. Jowl landjaeger kielbasa, tongue alcatra beef sirloin spare ribs capicola ham hock chuck. Pork chop kevin kielbasa jowl porchetta, capicola short loin shank.
+                        </p>
                         <p>{{ $tournament->description }}</p>
                     </div>
                 </div>

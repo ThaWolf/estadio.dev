@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-6 margin30">
                         <div class="footer-col">
-                            <h4>Acerca de Estadio</h4>
+                            <h4 style="color: white ">Acerca de Estadio</h4>
                             <p>
                                 Estadio es una aplicacion web para la organizacion y gestion de torneos de forma semi automatizada. Nuestra vision es proporcionar una herramienta que facilite el desarrollo de torneos de deportes electronicos, aportando de esta forma al crecimiento de la escena principalmente en la region latinoamericana. Nuestra mision es unir jugadores y organizadores en un entorno que los ayude a cumplir con sus metas de forma comoda y sencilla.
                             </p>
