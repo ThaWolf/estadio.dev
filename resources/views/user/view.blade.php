@@ -5,7 +5,7 @@
 <!-- User Header -->
 
 	<div class="col-md-3 media">
-   		<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail"  style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto; margin-top: 10px; " src="/img/torneos/placehodor.png">
+   		<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail"  style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto; margin-top: 25px; " src="/img/torneos/placehodor.png">
       <div class="row">
       <div class="col-md-3" style="text-align: center;">
     <h1 style="color:black;">{{$user->name}}</h1>

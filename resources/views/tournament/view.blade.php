@@ -176,8 +176,8 @@
                     rounds.push([
                         @foreach($round->matches as $match)
                         {    
-                            player1: { name: '{{$match->local->name}}', ID: {{$match->local->id}}, url: '{{route('match.view', [ 'id' => $match->id ])}}' @if($match->local == $match->winner), winner: true @endif },
-                            player2: { name: '{{$match->away->name}}', ID: {{$match->away->id}}, url: '{{route('match.view', [ 'id' => $match->id ])}}' @if($match->away == $match->winner), winner: true @endif }
+                            player1: { name: '{{$match->local->name}}',target:'#brackets', ID: {{$match->local->id}}, url: '{{route('match.view', [ 'id' => $match->id ])}}' @if($match->local == $match->winner), winner: true @endif },
+                            player2: { name: '{{$match->away->name}}', target:'#brackets',ID: {{$match->away->id}}, url: '{{route('match.view', [ 'id' => $match->id ])}}' @if($match->away == $match->winner), winner: true @endif }
                         },
                         @endforeach
                     ]);
@@ -235,6 +235,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Streaming -->
     <div class="tab-pane fade" id="streams">
         <div class="panel-body">

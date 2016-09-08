@@ -4,7 +4,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="agregarcuenta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="resultados" tabindex="-1" role="dialog" aria-labelledby="Resultados">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     	{!!Form::open(['route' => ['user.addAccount', $user->id], 'method' => 'POST', 'class' => 'form-horizontal']) !!}

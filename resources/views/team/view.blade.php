@@ -3,12 +3,15 @@
 @section('content')
 
 <!-- Team Header -->
-<div class="row">
+<div class="container">
+
 	<div class="col-md-3 media">
-   		<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail"  style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto; margin-top: 10px; " src="/img/torneos/placehodor.png">
-	</div>
-	<div class="col-md-9">
-		<h1 style="color:white;"> {{$team->name}}</h1>
+   		<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail"  style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto; margin-top: 25px; " src="/img/torneos/placehodor.png">
+	<div class="row">
+  <div class="col-md-3">
+  
+    <h1 style="color:white;"> {{$team->name}}</h1>
+    </div>
     @if($hasInvite)
     <div class="invite-form">
       Fuiste invitado a este equipo
@@ -20,9 +23,12 @@
         {!!Form::close() !!}
     </div>
     @endif
-	</div>
-</div>
+
+  </div>
+  </div>
+
 <!-- Tabs -->
+<div class="col-md-9 media">
 <div class="tabbable-panel" style="margin-top: 10px;">
     <div class="tabbable-line">
         <ul class="nav nav-tabs nav-justified">
@@ -147,6 +153,8 @@
     	</div>
 		@endif
     </div>
+</div>
+</div>
 </div>
 
 @endsection
