@@ -1,17 +1,20 @@
 @extends('layouts.cms')
 
 @section('content')
-
+<div class="container">
 <!-- User Header -->
-<div class="row">
+
 	<div class="col-md-3 media">
    		<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail"  style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto; margin-top: 10px; " src="/img/torneos/placehodor.png">
+      <div class="row">
+      <div class="col-md-3" style="text-align: center;">
+    <h1 style="color:black;">{{$user->name}}</h1>
+  </div>
+      </div>
 	</div>
-	<div class="col-md-9">
-		<h1 style="color:white;"> {{$user->name}}</h1>
-	</div>
-</div>
+
 <!-- Tabs -->
+<div class="col-md-9 media">
 <div class="tabbable-panel" style="margin-top: 10px;">
     <div class="tabbable-line">
         <ul class="nav nav-tabs nav-justified">
@@ -39,26 +42,12 @@
     		</div>
     	@endforeach
     	@if($availableSports->count() > 0)
-	    	<div class="row well" style="margin-top: 20px;">
-				<legend>Agregar Cuenta:</legend>
-				{!!Form::open(['route' => ['user.addAccount', $user->id], 'method' => 'POST', 'class' => 'form-horizontal']) !!}
-					<div class="form-group">
-						{!!Form::label( 'sport_id', 'Deporte:', [ 'class' => 'col-sm-2 control-label' ]) !!}
-						<div class="col-sm-10">
-						{!!Form::select('sport_id', $availableSports, '', [ 'class' => 'form-control' ]) !!}
-						</div>
-					</div>
-					<div class="form-group">
-						{!!Form::label( 'name', 'Nombre de usuario:', [ 'class' => 'col-sm-2 control-label' ]) !!}
-						<div class="col-sm-10">
-						{!!Form::text( 'name', '', [ 'class' => 'form-control', 'min' => '0' ]) !!}
-						</div>
-					</div>
-		            <div class="col-sm-offset-2">
-						{!!Form::submit( 'Agregar', ['class' => 'btn btn-primary']) !!}
-					</div>
-		        {!!Form::close() !!}
-			</div>
+	    	
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#agregarcuenta">
+  Agregar cuenta
+</button>
+
 		@endif
     	</div>
     </div>
@@ -142,5 +131,9 @@
 	</div>
 	</div>
 </div>
+</div>
+</div>
+
+@include('modals.cuenta')
 
 @endsection
