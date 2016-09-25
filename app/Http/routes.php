@@ -17,6 +17,10 @@ Route::get('/test/profile', 'HomeController@testProfile');
 
 Route::auth();
 
+Route::get('/pwc', function(){
+	return view ('layouts.pwc');
+});
+
 
 // Tournament controller routes
 Route::get('/tournament', ['as' => 'tournament.list', 'uses' => 'TournamentController@index']);
