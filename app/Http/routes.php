@@ -35,12 +35,19 @@ Route::post('/match/{id}/report', ['as' => 'match.report', 'uses' => 'MatchContr
 Route::post('/match/{id}/resolve', ['as' => 'match.resolve', 'uses' => 'MatchController@resolve']);
 // Team controller routes
 Route::get('/team/{id}', ['as' => 'team.view', 'uses' => 'TeamController@show']);
+Route::post('/team/{id}', ['as' => 'team.view', 'uses' => 'TeamController@update_avatar']);
 Route::post('/team/{id}/fire', ['as' => 'team.fire', 'uses' => 'TeamController@fire']);
 Route::post('/team/{id}/invite', ['as' => 'team.invite', 'uses' => 'TeamController@invite']);
 Route::post('/team/{id}/invite/accept', ['as' => 'team.invite.accept', 'uses' => 'TeamController@accept']);
 Route::post('/team/{id}/invite/decline', ['as' => 'team.invite.decline', 'uses' => 'TeamController@decline']);
+
+
+
+
 // User controller routes
 Route::get('/user/profile', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
+Route::post('/user/profile', ['as' => 'user.profile', 'uses' => 'UserController@update_avatar']);
 Route::get('/user/{id}/profile', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
 Route::post('/user/{id}/account', ['as' => 'user.addAccount', 'uses' => 'UserController@addAccount']);
+
 

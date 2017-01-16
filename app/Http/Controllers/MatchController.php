@@ -79,8 +79,20 @@ class MatchController extends Controller
             }
             $report->match()->associate($match);
             // Fill report from request
-            $report->score_local = $request->score_local;
-            $report->score_away = $request->score_away;
+
+            $best_of = $match->round->tournament->best_of;
+            $report->score_local = 0;
+            $report->score_away = 0;
+            for ($i=0; $i < $best_of; $i++) {
+                $current_match= 'match'.($i + 1);
+               if ($request->get($current_match) == 'local') {
+                    $report->score_local = $report->score_local +1;
+                }
+                elseif ($request->get($current_match) == 'away') {
+                    $report->score_away = $report->score_away +1;
+                }
+            }
+
             $report->image_url = $request->image_url;
             $report->description = $request->description;
             // Set winner from report
@@ -97,7 +109,7 @@ class MatchController extends Controller
         return redirect()->route('match.view', [ 'id' => $id ]);
     }
 
-    public function resolve(Request $request, $id){
+        public function resolve(Request $request, $id){
         $match = Match::findOrFail($id);
         $tournament = $match->round->tournament;
         $isCreator = $request->user()->id == $tournament->creator->id;
@@ -105,10 +117,22 @@ class MatchController extends Controller
            $request->session()->flash('alert-danger', 'No podes cambiar el resultado de un partido si no lo creaste'); 
         } else {
             // Fill match from request
-            $match->score_local = $request->score_local;
-            $match->score_away = $request->score_away;
+            $best_of = $match->round->tournament->best_of;
+            $match->score_local = 0;
+            $match->score_away = 0;
+            for ($i=0; $i < $best_of; $i++) {
+                $current_match= 'match'.($i + 1);
+               if ($request->get($current_match) == 'local') {
+                    $match->score_local = $match->score_local +1;
+                }
+                elseif ($request->get($current_match) == 'away') {
+                    $match->score_away = $match->score_away +1;
+                }
+            }
+
             $match->status = 'Finished';
-            if($match->score_local == $match->score_away){
+            if($match->score_local == 
+                $match->score_away){
                 $match->status = 'Dispute';
                 $match->winner()->dissociate();
             } else if($match->score_local > $match->score_away){
@@ -120,5 +144,4 @@ class MatchController extends Controller
             $request->session()->flash('alert-success', 'Cambiado resultado del partido');
         }
         return redirect()->route('match.view', [ 'id' => $id ]);
-    }
-}
+    }}

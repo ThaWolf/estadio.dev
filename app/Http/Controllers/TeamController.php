@@ -10,6 +10,7 @@ use App\Team;
 use App\User;
 use App\SportPlayer;
 use App\UserNotification;
+use Image;
 
 class TeamController extends Controller
 {
@@ -126,4 +127,30 @@ class TeamController extends Controller
         }
         return redirect()->route('team.view', [ 'id' => $id ]);
     }
+
+    public function update_avatar(Request $request, $id){
+        $team = Team::with(['owner', 'captain', 'players', 'sport', 'invites'])->findOrFail($id);
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300,300)->save( public_path('img/avatar_team/' . $filename ));
+            $team->avatar = $filename;
+            $team->save();
+        }
+
+        $isOwner = $request->user()->id == $team->owner->id;
+        if($team->players->count() >= $team->sport->max_team_players){
+            $canInvite = false;
+        } else {
+            $canInvite = $isOwner;
+        }
+        $hasInvite = ($team->invites->contains($request->user()));
+        return view ('team.view', [ 
+            'team' => $team,
+            'canInvite' => $canInvite,
+            'isOwner' => $isOwner,
+            'hasInvite' => $hasInvite
+        ]);
+    }
+
 }

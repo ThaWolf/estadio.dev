@@ -6,7 +6,31 @@
 <div class="container">
 
 	<div class="col-md-3 media">
-   		<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail"  style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto; margin-top: 25px; " src="/img/torneos/placehodor.png">
+   		<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail"  style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto; margin-top: 25px; " src="/img/avatar_team/{{$team->avatar}}">
+      @if($isOwner)
+        <script type="text/javascript">
+        function showForm(){
+          var contenedor = document.getElementById("avatarForm");
+        if (contenedor.style.display == "none") {
+          contenedor.style.display = "block";
+        }else {
+          contenedor.style.display = "none";
+        }
+          return true;
+
+        }
+      </script>
+       <button onclick="showForm();" class="btn">Cambiar foto</button>
+       <form  enctype="multipart/form-data" action="{{$team->id}}" method="POST">
+          <div id="avatarForm" style="display: none;">
+          <input id="form1" type="file" accept="image/x-png" name="avatar">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input id="form1" type="submit" value="Cargar">
+          </div>
+        </form>
+      @endif
+
+
 	<div class="row">
   <div class="col-md-3">
   
@@ -48,7 +72,7 @@
 			        <div class="col-md-3" style="margin-bottom: 36px;">
 	                    <div class="media">
 	                        <a href="#" class="pull-left">        
-	                            <img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 64px; height: 64px;" src="/img/torneos/placehodor.png">      
+	                            <img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 64px; height: 64px;" src="/img/avatar_usr/{{$player->avatar}}">      
 	                        </a>
 	                        <div class="media-body">
 	                            <h3 class="media-heading"><strong>
@@ -56,7 +80,7 @@
                                   {{ $player->name }}
                                 </a>
                               </strong></h3>
-	                            <p class="small">{{ $player->accounts()->forSport($team->sport)->first()->name }}</p>
+	                            <p class="small">{{  $team->sport->name  }}</p>
 	                            @if($isOwner)
 								{!!Form::open(['route' => ['team.fire', $team->id], 'method' => 'POST']) !!}
 									<input type="hidden" name="player_id" value="{{$player->id}}">

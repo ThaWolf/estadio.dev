@@ -10,6 +10,8 @@ use App\Http\Requests;
 use App\SportPlayer;
 use App\Sport;
 use App\User;
+use Image;
+use Auth;
 
 class UserController extends Controller
 {
@@ -57,6 +59,54 @@ class UserController extends Controller
     		]);
     		$request->session()->flash('alert-success', 'Cuenta agregada!');
     	}
-    	return redirect()->route('user.profile');
+        $id= null;
+        if ($id == null) {
+            $id = $request->user()->id;
+        }
+        $user = User::findOrFail($id);
+        if($id == $request->user()->id){
+            $sportIds = [];
+            foreach($user->accounts as $accounts){
+                $sportIds[] = $accounts->sport_id;
+            }
+            $sports = Sport::whereNotIn('id', $sportIds)->lists('name', 'id');
+        } else {
+            $sports = collect([]);
+        }
+        return view('user.view',[
+            'user' => $user,
+            'availableSports' => $sports
+        ]);
     }
+
+    public function update_avatar(Request $request){
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300,300)->save( public_path('img/avatar_usr/' . $filename ));
+            $user = Auth::user();
+            $user->avatar = $filename;
+            $user->save();
+        }
+        $id= null;
+        if ($id == null) {
+            $id = $request->user()->id;
+        }
+        $user = User::findOrFail($id);
+        if($id == $request->user()->id){
+            $sportIds = [];
+            foreach($user->accounts as $accounts){
+                $sportIds[] = $accounts->sport_id;
+            }
+            $sports = Sport::whereNotIn('id', $sportIds)->lists('name', 'id');
+        } else {
+            $sports = collect([]);
+        }
+        return view('user.view',[
+            'user' => $user,
+            'availableSports' => $sports
+        ]);
+    }
+
+    
 }

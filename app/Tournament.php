@@ -110,5 +110,31 @@ class Tournament extends Model
 		$this->participants()->detach($this->participantForUser($user));
 		return true;
 	}
+
+	public function change_date_string($tournament){
+		$array_months = array(
+    		"1" => "Enero",
+    		"2" => "Febrero",
+  		    "3"  => "Marzo",
+		    "4"  => "Abril",
+		    "5"  => "Mayo",
+		    "6"  => "Junio",
+		    "7"  => "Julio",
+		    "8"  => "Agosto",
+		    "9"  => "Septiembre",
+		    "10"  => "Octubre",
+		    "11" => "Noviembre",
+		    "12"  => "Diciembre",
+		);
+		$phpdate = strtotime( $tournament->start_time );
+		$mysqldateMonth = date( 'm', $phpdate );
+		$mysqldateDay = date( 'd', $phpdate );
+		$month = "1";
+		while ($mysqldateMonth != $month) {
+			$month++;
+		}
+		$tournament->start_time = $mysqldateDay." de ".$array_months[$month];
+		return $tournament;
+	}
     
 }

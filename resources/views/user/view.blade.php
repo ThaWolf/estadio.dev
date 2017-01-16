@@ -5,7 +5,32 @@
 <!-- User Header -->
 
 	<div class="col-md-3 media">
-   		<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail"  style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto; margin-top: 25px; " src="/img/torneos/placehodor.png">
+    <div>
+   		 <img id="imgAvatar" alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail"  style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto; margin-top: 25px; " src="/img/avatar_usr/{{$user->avatar}}">
+      <div id="imgAvatarAction" class="changeaction" style="position: absolute; top:230px ; left:20px ; padding-left:10px; background-color:rgba(0,0,0,0.7); width: 87%; height: 45px; padding-top: 10px; display: none ">Cambiar foto de Perfil</div>
+      </div>
+      
+      <script type="text/javascript">
+        function showForm(){
+          var contenedor = document.getElementById("avatarForm");
+        if (contenedor.style.display == "none") {
+          contenedor.style.display = "block";
+        }else {
+          contenedor.style.display = "none";
+        }
+          return true;
+
+        }
+      </script>
+       <button onclick="showForm();" class="btn">Cambiar foto</button>
+       <form  enctype="multipart/form-data" action="profile" method="POST">
+          <div id="avatarForm" style="display: none;">
+          <input id="form1" type="file" accept="image/x-png" name="avatar">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input id="form1" type="submit" value="Cargar">
+          </div>
+        </form>
+
       <div class="row">
       <div class="col-md-3" style="text-align: center;">
     <h1 style="color:black;">{{$user->name}}</h1>
@@ -31,7 +56,7 @@
     	@foreach($user->accounts as $account)
     		<div class="row">
 				<div class="col-md-4">
-					<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 250px; height: 50px; margin-top: 10px; " src="/img/torneos/overwatch1.png">
+					<img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 250px; height: 50px; margin-top: 10px; " src="/img/avatar_sport/{{$account->sport->img}}">
 				</div>
 				<div class="col-md-4" style="text-align: center;">
 					<h2>{{ $account->name }}</h2>
@@ -58,7 +83,7 @@
 	        <div class="col-md-3" style="margin-bottom: 36px;">
                 <div class="media">
                     <a href="#" class="pull-left">        
-                        <img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 64px; height: 64px;" src="/img/torneos/placehodor.png">      
+                        <img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 64px; height: 64px;" src="/img/avatar_team/{{$team->avatar}}">      
                     </a>
                     <div class="media-body">
                         <h3 class="media-heading"><strong>

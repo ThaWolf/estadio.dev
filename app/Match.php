@@ -90,7 +90,12 @@ class Match extends Model
 			if(!$dispute){
 				$this->status = 'Finished';
 			}
+		}elseif ($this->away->name == "Bye") {
+			$this->winner()->associate($this->local);
+			$this->status = 'Finished';
 		}
+
+		
 		$this->save();
 	}
 }

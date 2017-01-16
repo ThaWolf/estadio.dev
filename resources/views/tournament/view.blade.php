@@ -5,10 +5,10 @@
 <div class="row" style="margin-bottom: 10px;">
     <div class="col-xs-4" style="text-align: right;">
         <div>
-            <h3>{{ $tournament->sport->name }}</h3>      
+           <h2>{{ $tournament->name }}</h2> <h3>{{ $tournament->sport->name }}</h3>      
         </div>
         <div style="margin-top: 10px; margin-bottom: 10px;">
-            <h2>{{ $tournament->name }}</h2>        
+                    
         </div>
         <div>
             @if($isCreator && ($tournament->status != 'Finished'))
@@ -23,7 +23,21 @@
                 @endif
             @endif
         </div>
+
     </div>
+            <div style=" padding-top: 100px; margin-right: 100px">
+                @if($tournament->status == 'NotStarted')
+                    @if($canShowUnsubscribe)
+                        {!!Form::open(['route' => ['tournament.unsubscribe', $tournament->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
+                            {!!Form::submit( 'Retirate', ['class' => 'btn btn-primary']) !!}
+                        {!!Form::close() !!}
+                    @else
+                        {!!Form::open(['route' => ['tournament.subscribe', $tournament->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
+                            {!!Form::submit( 'Suscribirse', ['class' => 'btn btn-primary']) !!}
+                        {!!Form::close() !!}
+                    @endif
+                @endif  
+        </div>  
     </div>
       
     
@@ -44,7 +58,7 @@
     <!-- General Data -->
     <div class="tab-pane fade in active" id="detalles">
             
-            <div style="min-width:940px; min-height: 400px; background: url({{ asset('img/torneos/overwatch.png')}}) no-repeat center; background-size: 100% 100%;" class="jumbotron jumbotron-main-bg">
+            <div style="min-width:940px; min-height: 400px; background:'/img/tournaments/bannerImg/{{$tournament->img_banner}}' no-repeat center; background-size: 100% 100%;" class="jumbotron jumbotron-main-bg">
             </div>
               
                  
@@ -121,7 +135,7 @@
                 Participantes - {{$tournament->participants()->count()}}/{{$tournament->needed_players}}
                 @if($canShowSubscribe)
                     {!!Form::open(['route' => ['tournament.subscribe', $tournament->id], 'method' => 'POST', 'class' => 'pull-right']) !!}
-                        {!!Form::submit( 'Subscribite', ['class' => 'btn btn-primary']) !!}
+                        {!!Form::submit( 'Suscribirse', ['class' => 'btn btn-primary']) !!}
                     {!!Form::close() !!}
                 @endif
                 @if($canShowUnsubscribe)
@@ -140,7 +154,7 @@
                 <div class="col-md-3" style="margin-bottom: 36px;">
                     <div class="media">
                         <a href="#" class="pull-left">        
-                            <img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 64px; height: 64px;" src="/img/torneos/placehodor.png">      
+                            <img alt="64x64" data-src="/holder.js/64x64" class="media-object img-thumbnail" style="width: 64px; height: 64px;" src="/img/avatar_usr/{{$participant->avatar}}">      
                         </a>
                         <div class="media-body">
                             @if(!$tournament->haveTeams())

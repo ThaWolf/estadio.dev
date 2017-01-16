@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Requests;
 
 use App\Tournament;
+use DB;
 
 class TournamentController extends Controller
 {
@@ -22,10 +23,22 @@ class TournamentController extends Controller
         $this->middleware('auth', ['except' => []]);
     }
 
-    public function index(){
+    public function index(Request $request){
         $tournaments = Tournament::all();
-        
-        return view('tournament.list',['tournaments' => $tournaments]);
+        $user = $request->user();
+        $allSports = DB::table('sport')->get();
+        foreach ($tournaments as $tournament) {
+            $tournament= $tournament->change_date_string($tournament);
+        };
+        $canParticipate = ($tournament->status == 'NotStarted') && $tournament->canParticipate($user);
+        if($tournament->isSubscribed($user)){
+            $canShowSubscribe = false;
+            $canShowUnsubscribe = $canParticipate;
+        } else {
+            $canShowSubscribe = $canParticipate && !$tournament->hasEnoughtPlayers();
+            $canShowUnsubscribe = false;
+        }
+        return view('tournament.list',['tournaments' => $tournaments, 'sports' => $allSports, 'user' => $user]);
     }
 
     /**

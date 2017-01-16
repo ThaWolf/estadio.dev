@@ -52,8 +52,10 @@ class StartTournamentCommand extends Command
             $currentDate = new DateTime;
         }
         $tournament = Tournament::findOrFail($this->argument('tournamentId'));
-        if($tournament->canStart($currentDate) && $tournament->hasEnoughtPlayers()){
+
+        if($tournament->canStart($currentDate)  ){
             $timeBetweenRounds = $tournament->getRoundInterval();
+
             // Change tournament status
             $tournament->status = 'InProgress';
             $tournament->save();
@@ -66,12 +68,27 @@ class StartTournamentCommand extends Command
             // Set current round
             $tournament->current_round()->associate($round);
             $tournament->save();
+            $bot= User::findOrFail(2);
             // Create matches
             $players = $tournament->participants()->get();
-            while($players->count() > 0){
-                $matchPlayers = $players->random(2);
+            $matchs = (($tournament->needed_players)/2);
+            while($matchs != 0){
+                
+                if ($players->count() == 0) {
+                    $matchPlayers[0] = $bot;
+                    $matchPlayers[1] = $bot;
+                }elseif ($matchs == $players->count()) {
+                    $matchPlayers[0] = $players->random();
+                    $matchPlayers[1] = $bot;
+                }
+                else{
+                    $matchPlayers = $players->random(2);
+                }
+
+                $matchs--;
                 $players = $players->diff($matchPlayers);
                 // Create match
+
                 $match = new Match;
                 $match->local()->associate($matchPlayers->first());
                 $match->away()->associate($matchPlayers->last());
@@ -81,3 +98,4 @@ class StartTournamentCommand extends Command
         }
     }
 }
+
